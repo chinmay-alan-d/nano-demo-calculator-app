@@ -1,4 +1,5 @@
 from flask import Flask,request
+import json
 
 app = Flask(__name__)
 
@@ -12,8 +13,11 @@ def add():
     data = request.json
     first = data.get('first')
     second = data.get('second')
-    res = first+second
-    return str(res)
+    res = first + second
+    ans = {
+        "result" : res
+    }
+    return json.dumps(ans)
 
 @app.route("/calculator/subtract", methods=['POST'])
 def subtract():
@@ -21,7 +25,10 @@ def subtract():
     first = data.get('first')
     second = data.get('second')
     res = first-second
-    return str(res)
+    ans = {
+        "result" : res
+    }
+    return json.dumps(ans)
 
 if __name__ == '__main__':
     app.run(port=8080,host='0.0.0.0')
